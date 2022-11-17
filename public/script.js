@@ -6,7 +6,7 @@ const CANVAS_WIDTH = canvas.width = 800;
 const CANVAS_HEIGHT = canvas.height = 700;
 
 // Next consider how we want dynamic background speeds depending on the character
-let gameSpeed = 8; 
+let gameSpeed = 10; 
 
 // Source the layers from the /images folder | all are H: 720px
 const backgroundLayer1 = new Image();
@@ -25,6 +25,8 @@ backgroundLayer5.src = './images/layer-5.png';
 const slider = document.getElementById('slider');
 slider.value = gameSpeed;
 const showGameSpeed = document.getElementById('showGameSpeed');
+showGameSpeed.innerHTML = gameSpeed;
+
 
 
 
