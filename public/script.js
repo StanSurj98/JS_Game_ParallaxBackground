@@ -52,10 +52,12 @@ class Layer {
     // This is the scroll speed of each layer 
     // same as our [ x -= gameSpeed ] variable earlier
     this.x = Math.floor(this.x - this.speed);
+    this.x2 = Math.floow(this.x2 - this.speed);
   }
-  // Responds to update and re-draws the image
+  // Responds to update and re-draws the two images
   draw(){
-
+    ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+    ctx.drawImage(this.image, this.x2, this.y, this.width, this.height);
   }
 }
 
