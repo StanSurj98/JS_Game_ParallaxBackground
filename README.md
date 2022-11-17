@@ -8,7 +8,7 @@ https://user-images.githubusercontent.com/108106480/202569943-fa125513-2a5c-4448
 Adjust game speed by scrolling the range slider.
 
 ## Installation
-Fork this repository onto your local machine. 
+Fork and clone this repository onto your local machine. 
 Install `VSCode Live Server` extension, and right click the `index.html` and select `Open with Live Server`
 
 
