@@ -26,22 +26,19 @@ let x = 0;
 let x2 = 2400;
 
 
-// Next let's build our function that holds the animation logic
 const animate = () => {
-  // Clears the canvas frame at beginning of each iteration, no more "smudging" from frames being on top of each other
+  // Clears canvas each iteration, no "smudging" from layered frames
   ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
-  // First let's draw a layer, from top left canvas and fill
   ctx.drawImage(backgroundLayer4, x, 0);
-  // This is to prevent big gap, we just stack another image in front of it
+  // To prevent big gap, stack another image in front
   ctx.drawImage(backgroundLayer4, x2, 0);
-  // let's reset the image after it scrolls -1000px pixels
+  // Resetting the images after it scrolls the full length
   if (x < -2400) x = 2400; 
-  // each loop we're drawing the image "x" px to left of canvas
   else x -= gameSpeed;
-  // Must reset the position of the 2nd image as well
+
+  // Reset the position of the 2nd image
   if (x2 < -2400) x2 = 2400; 
-  // each loop we're drawing the image "x" px to left of canvas
   else x2 -= gameSpeed;
 
   // Recursion to create an animation effect
