@@ -3,6 +3,10 @@ This is a small exercise in learning how to create scrolling parallax background
 
 
 
+https://user-images.githubusercontent.com/108106480/202569385-2d79a7d9-dbea-4792-8c13-ec50df8eb0b7.mov
+
+
+
 Adjust game speed by scrolling the range slider.
 
 ## Installation
