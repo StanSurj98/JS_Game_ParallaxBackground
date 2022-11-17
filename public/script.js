@@ -21,7 +21,7 @@ backgroundLayer5.src = './images/layer-5.png';
 // Global Dynamic GameSpeed
 let gameSpeed = 10;
 // Global GameFrame - adjusts the layer's "x" positions and updated each animation
-let gameFrame = 0;
+// let gameFrame = 0; // this method is jumpy/skippy
 
 // Speed Slider on HTML
 const slider = document.getElementById('slider');
@@ -55,16 +55,16 @@ class Layer {
     // don't need this line if you want linear speed game
     this.speed = gameSpeed * this.speedModifier;
 
+    // If the first image at x = 0, scrolls its entirety, reset to x = 0 
+    if (this.x <= -this.width) {
+      this.x = 0;
+    }
+
+    // Scroll speed of each layer | constantly re-adjust x pixels according to speed
+    this.x = Math.floor(this.x - this.speed);
+
     // Similar to before, this ensures that the x-position is somewhere always between 0 and this.width (2400px)
-    this.x = gameFrame * this.speed % this.width;
-
-    // // If the first image at x = 0, scrolls its entirety, reset to x = 0 
-    // if (this.x <= -this.width) {
-    //   this.x = 0;
-    // }
-
-    // // Scroll speed of each layer | constantly re-adjust x pixels according to speed
-    // this.x = Math.floor(this.x - this.speed);
+    // this.x = gameFrame * this.speed % this.width; // this method is jumpy/skippy
   }
 
   // Responds to update and re-draws the two images
@@ -99,7 +99,7 @@ const animate = () => {
     gameObject.draw();
   });
 
-  gameFrame--;
+  // gameFrame--; // this method was really jumpy/skippy
 
   // Recursion to create an animation effect
   requestAnimationFrame(animate);
