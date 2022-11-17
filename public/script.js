@@ -6,7 +6,7 @@ const CANVAS_WIDTH = canvas.width = 800;
 const CANVAS_HEIGHT = canvas.height = 700;
 
 // Next consider how we want dynamic background speeds depending on the character
-let gameSpeed = 5; 
+let gameSpeed = 15; 
 
 // Source the layers from the /images folder | all are H: 720px
 const backgroundLayer1 = new Image();
@@ -31,8 +31,10 @@ const animate = () => {
 
   // First let's draw a layer, from top left canvas and fill
   ctx.drawImage(backgroundLayer4, x, 0);
+  // let's reset the image after it scrolls -1000px pixels
+  if (x < -1000) x = 0; 
   // each loop we're drawing the image "x" px to left of canvas
-  x -= gameSpeed; 
+  else x -= gameSpeed;
 
   // Recursion to create an animation effect
   requestAnimationFrame(animate);
