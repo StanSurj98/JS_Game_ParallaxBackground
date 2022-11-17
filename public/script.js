@@ -32,7 +32,7 @@ const animate = () => {
   // First let's draw a layer, from top left canvas and fill
   ctx.drawImage(backgroundLayer4, x, 0);
   // each loop we're drawing the image "x" px to left of canvas
-  x--; 
+  x -= gameSpeed; 
 
   // Recursion to create an animation effect
   requestAnimationFrame(animate);
