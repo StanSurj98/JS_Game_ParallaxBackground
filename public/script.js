@@ -35,11 +35,12 @@ const animate = () => {
   ctx.drawImage(backgroundLayer4, x2, 0);
 
   // Resetting the images after it scrolls the full length
-  if (x < -2400) x = 2400 - gameSpeed; // offset the position by gameSpeed, decreases the black gap in /b/
+  if (x < -2400) x = 2400 + x2 - gameSpeed; 
+  // offset the position by x2's current position and gameSpeed
   else x -= gameSpeed;
 
   // Reset the position of the 2nd image
-  if (x2 < -2400) x2 = 2400 - gameSpeed; // this is because one image is always on screen while the other resets
+  if (x2 < -2400) x2 = 2400 + x - gameSpeed; 
   else x2 -= gameSpeed;
 
   // Recursion to create an animation effect
