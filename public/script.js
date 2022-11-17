@@ -21,29 +21,55 @@ const backgroundLayer5 = new Image();
 backgroundLayer5.src = './images/layer-5.png';
 
 
-// This controls our horizontal "animation"
-let x = 0;
-let x2 = 2400;
+// Let's animate all layers in a programmatic way
+class Layer {
+  constructor(image, speedModifier) {
+    this.x = 0;
+    this.y = 0;
+    this.width = 2400;
+    this.height = 700;
+    this.x2 = this.width; // need to start next to first image
+    this.image = image;
+    this.speedModifier = speedModifier;
+    // This allows the layer to move at different speeds but proportionate to the global gameSpeed
+    this.speed = gameSpeed * this.speedModifier; 
+  }
+
+  // Changes the horizontal position
+  update(){
+    // Allows game speed to be dynamically updated
+    // don't need this line if you want linear speed game
+    this.speed = gameSpeed * this.speedModifier;
+
+    // This is same as before, we scroll -"2400"px in this case, reset first image taking account 2nd image's position
+    if (this.x < -this.width) {
+      this.x = this.width + this.x2 - this.speed;
+    }
+    if (this.x2 < -this.width) {
+      this.x2 = this.width + this.x - this.speed;
+    }
+
+    // This is the scroll speed of each layer 
+    // same as our [ x -= gameSpeed ] variable earlier
+    this.x = Math.floor(this.x - this.speed);
+  }
+  // Responds to update and re-draws the image
+  draw(){
+
+  }
+}
 
 
+
+
+// ---- Main Animation Function ----
 const animate = () => {
   // Clears canvas each iteration, no "smudging" from layered frames
   ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
-  ctx.drawImage(backgroundLayer4, x, 0);
-  // To prevent big gap, stack another image in front
-  ctx.drawImage(backgroundLayer4, x2, 0);
-
-  // Resetting the images after it scrolls the full length
-  if (x < -2400) x = 2400 + x2 - gameSpeed; 
-  // offset the position by x2's current position and gameSpeed
-  else x -= gameSpeed;
-
-  // Reset the position of the 2nd image
-  if (x2 < -2400) x2 = 2400 + x - gameSpeed; 
-  else x2 -= gameSpeed;
 
   // Recursion to create an animation effect
   requestAnimationFrame(animate);
 };
 animate();
+
