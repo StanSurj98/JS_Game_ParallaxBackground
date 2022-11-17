@@ -21,6 +21,14 @@ const backgroundLayer5 = new Image();
 backgroundLayer5.src = './images/layer-5.png';
 
 
+// Speed Slider on HTML
+const slider = document.getElementById('slider');
+slider.value = gameSpeed;
+const showGameSpeed = document.getElementById('showGameSpeed');
+
+
+
+
 // Let's animate all layers in a programmatic way
 class Layer {
   constructor(image, speedModifier) {
