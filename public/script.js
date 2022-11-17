@@ -62,13 +62,14 @@ class Layer {
 }
 
 // Now let's create instances of the layer classes
-const layer1 = new Layer(backgroundLayer1, 0.1);
-const layer2 = new Layer(backgroundLayer2, 0.15);
-const layer3 = new Layer(backgroundLayer3, 0.1); 
-const layer4 = new Layer(backgroundLayer4, 0.3); 
-const layer5 = new Layer(backgroundLayer5, 1); 
+const layer1 = new Layer(backgroundLayer1, 0.5);
+const layer2 = new Layer(backgroundLayer2, 0.1);
+const layer3 = new Layer(backgroundLayer3, 0.15); 
+const layer4 = new Layer(backgroundLayer4, 0.25); 
+const layer5 = new Layer(backgroundLayer5, 0.5); 
 
-
+// Refactor and DRY up code - Group into an array
+const gameObjects = [layer1, layer2, layer3, layer4, layer5];
 
 
 
@@ -77,27 +78,11 @@ const animate = () => {
   // Clears canvas each iteration, no "smudging" from layered frames
   ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
-  
-  // Let's animate the layers - Position matters
-  // --- BG Grey
-  layer1.update();
-  layer1.draw();
-  // --- BG City
-  layer2.update();
-  layer2.draw();
-  // --- Clouds
-  layer3.update();
-  layer3.draw();
-  // --- City w/ Monsters
-  layer4.update();
-  layer4.draw();
-  // --- Brick Road
-  layer5.update();
-  layer5.draw();
-
-
-
-
+  // Let's call forEach on the gameObjects
+  gameObjects.forEach((gameObject) => {
+    gameObject.update();
+    gameObject.draw();
+  });
 
   // Recursion to create an animation effect
   requestAnimationFrame(animate);
