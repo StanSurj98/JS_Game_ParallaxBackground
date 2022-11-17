@@ -19,3 +19,15 @@ const backgroundLayer4 = new Image();
 backgroundLayer4.src = './images/layer-4.png';
 const backgroundLayer5 = new Image();
 backgroundLayer5.src = './images/layer-5.png';
+
+// Next let's build our function that holds the animation logic
+const animate = () => {
+
+  // First let's draw the first layer, from top left canvas to bottom right. 
+  ctx.drawImage(backgroundLayer4, 0, 0);
+
+
+  // Recursion to create an animation effect
+  requestAnimationFrame(animate);
+};
+animate();
