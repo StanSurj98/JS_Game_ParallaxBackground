@@ -7,3 +7,15 @@ const CANVAS_HEIGHT = canvas.height = 700;
 
 // Next consider how we want dynamic background speeds depending on the character
 let gameSpeed = 5; 
+
+// Source the layers from the /images folder
+const backgroundLayer1 = new Image();
+backgroundLayer1.src = './images/layer-1.png';
+const backgroundLayer2 = new Image();
+backgroundLayer2.src = './images/layer-2.png';
+const backgroundLayer3 = new Image();
+backgroundLayer3.src = './images/layer-3.png';
+const backgroundLayer4 = new Image();
+backgroundLayer4.src = './images/layer-4.png';
+const backgroundLayer5 = new Image();
+backgroundLayer5.src = './images/layer-5.png';
