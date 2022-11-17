@@ -41,7 +41,6 @@ class Layer {
     this.y = 0;
     this.width = 2400;
     this.height = 700;
-    this.x2 = this.width; // need to start next to first image
     this.image = image;
     this.speedModifier = speedModifier;
     // Layer have different speeds but proportionate to global gameSpeed
@@ -54,23 +53,21 @@ class Layer {
     // don't need this line if you want linear speed game
     this.speed = gameSpeed * this.speedModifier;
 
-    // Same as before, scroll -2400px in this case, reset first image taking account 2nd image's position
-    if (this.x < -this.width) {
-      this.x = this.width + this.x2 - this.speed;
-    }
-    if (this.x2 < -this.width) {
-      this.x2 = this.width + this.x - this.speed;
+    // If the first image at x = 0, scrolls its entirety, reset to x = 0 
+    if (this.x <= -this.width) {
+      this.x = 0;
     }
 
-    // This is the scroll speed of each layer 
-    // same as our [ x -= gameSpeed ] variable earlier
+    // Scroll speed of each layer | constantly re-adjust x pixels according to speed
     this.x = Math.floor(this.x - this.speed);
-    this.x2 = Math.floor(this.x2 - this.speed);
   }
+
   // Responds to update and re-draws the two images
   draw(){
     ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
-    ctx.drawImage(this.image, this.x2, this.y, this.width, this.height);
+    ctx.drawImage(this.image, this.x + this.width, this.y, this.width, this.height);
+    // 2nd image is ALWAYS 2400px to the right of the first 
+    // Also, ONLY the INITIAL frame of 800px will ever get seen before the first image resets both to x = 0, "x2" = 2400px
   }
 }
 
