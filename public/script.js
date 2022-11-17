@@ -33,12 +33,13 @@ const animate = () => {
   ctx.drawImage(backgroundLayer4, x, 0);
   // To prevent big gap, stack another image in front
   ctx.drawImage(backgroundLayer4, x2, 0);
+
   // Resetting the images after it scrolls the full length
-  if (x < -2400) x = 2400; 
+  if (x < -2400) x = 2400 - gameSpeed; // offset the position by gameSpeed, decreases the black gap in /b/
   else x -= gameSpeed;
 
   // Reset the position of the 2nd image
-  if (x2 < -2400) x2 = 2400; 
+  if (x2 < -2400) x2 = 2400 - gameSpeed; // this is because one image is always on screen while the other resets
   else x2 -= gameSpeed;
 
   // Recursion to create an animation effect
