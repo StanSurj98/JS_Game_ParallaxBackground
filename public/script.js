@@ -5,8 +5,6 @@ const ctx = canvas.getContext("2d");
 const CANVAS_WIDTH = canvas.width = 800;
 const CANVAS_HEIGHT = canvas.height = 700;
 
-// Next consider how we want dynamic background speeds depending on the character
-let gameSpeed = 10; 
 
 // Source the layers from the /images folder | all are H: 720px
 const backgroundLayer1 = new Image();
@@ -20,18 +18,23 @@ backgroundLayer4.src = './images/layer-4.png';
 const backgroundLayer5 = new Image();
 backgroundLayer5.src = './images/layer-5.png';
 
+// Global Dynamic GameSpeed
+let gameSpeed = 10; 
 
 // Speed Slider on HTML
 const slider = document.getElementById('slider');
-slider.value = gameSpeed;
+slider.value = gameSpeed; // Init value
 const showGameSpeed = document.getElementById('showGameSpeed');
 showGameSpeed.innerHTML = gameSpeed;
 
+// Responsive Slider | use "input" not "change" here for immediate response
+slider.addEventListener("input", (e) => {
+  gameSpeed = e.target.value; // on input, update the gameSpeed & text
+  showGameSpeed.innerHTML = gameSpeed;
+});
 
 
-
-
-// Let's animate all layers in a programmatic way
+// Animate all layers in a programmatic way
 class Layer {
   constructor(image, speedModifier) {
     this.x = 0;
@@ -41,7 +44,7 @@ class Layer {
     this.x2 = this.width; // need to start next to first image
     this.image = image;
     this.speedModifier = speedModifier;
-    // This allows the layer to move at different speeds but proportionate to the global gameSpeed
+    // Layer have different speeds but proportionate to global gameSpeed
     this.speed = gameSpeed * this.speedModifier; 
   }
 
@@ -51,7 +54,7 @@ class Layer {
     // don't need this line if you want linear speed game
     this.speed = gameSpeed * this.speedModifier;
 
-    // This is same as before, we scroll -"2400"px in this case, reset first image taking account 2nd image's position
+    // Same as before, scroll -2400px in this case, reset first image taking account 2nd image's position
     if (this.x < -this.width) {
       this.x = this.width + this.x2 - this.speed;
     }
@@ -88,7 +91,7 @@ const animate = () => {
   // Clears canvas each iteration, no "smudging" from layered frames
   ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
-  // Let's call forEach on the gameObjects
+  // forEach gameObject invoke their instance methods
   gameObjects.forEach((gameObject) => {
     gameObject.update();
     gameObject.draw();
